@@ -1,0 +1,211 @@
+DIALOG start
+ entry go
+ extrn PRINT, ADD, NUMB, SYMB, DIV, SUB, MUL, DR, BR, CP, DG, RP, DGALL
+
+rzl 
+    e1', 'e2 = <check <rzl3 <podst <viraz <podobn <lev <paring e1>>>>', '<rzl2 e2>>>>
+    e1 = <check <viraz <podobn  <lev <paring e1>>>>>
+
+rzl2 e1', 'e2 = <podobn <lev <paring e1>>>', '<rzl2 e2>
+     e1 = <podobn <lev <paring e1>>>
+
+rzl3 e1', 'e2 = <podobn e1>', '<rzl3 e2>
+     e1 = <podobn e1>
+
+
+paring e1')'e2 = <paring <par e1> e2>
+       e1 = e1
+
+par R e1'('e2 = e1(e2)
+      e1 = e1
+
+lev e1((e2)'@')e3 = e1((e2)'@')e3
+    e1'='e2 = <kanon e1<dvoinz '-'e2>>'=0'
+
+kanon v1v('+-')3v2 = <f <dvoinz v1>><kanon <dvoinz v3v2>>
+      v1 = <f <dvoinz v1>>
+      e1 = e1
+
+f '+'v1'*'s(L)2 = ((<vich v1>)s2)
+  v1'*'s(L)2 = ((<vich v1>)s2)
+  s(L)1 = (('1')s1)
+  '+'s(L)1 = (('1')s1)
+  '-'s(L)1 = (('-1')s1)
+  '+'v1 = ((<vich v1>)'@')
+  v1 = ((<vich v1>)'@')
+  e1 = e1
+  
+vich e1(e2)e3 = <vich  e1<vich e2>e3>
+     e1 = <vich2 e1>
+
+vich2 
+      e(D)1 = e1
+      '+'e(D)1 = e1
+      '-'e(D)1 = '-'e1
+      v(D)1'+'v(D)2 = <SYMB <ADD (<NUMB v1>)<NUMB v2>>>
+      '+'v(D)1'+'v(D)2 = <SYMB <ADD (<NUMB v1>)<NUMB v2>>>
+      '+'v(D)1'-'v(D)2 = <SYMB <SUB (<NUMB v1>)<NUMB v2>>>
+      '-'v(D)1'+'v(D)2 = <SYMB <ADD (<NUMB '-'v1>)<NUMB v2>>>
+      v(D)1'-'v(D)2 = <SYMB <SUB (<NUMB v1>)<NUMB v2>>>
+      '-'v(D)1'-'v(D)2 = <SYMB <SUB (<NUMB '-'v1>)<NUMB v2>>>
+      v(D)1'*'v(D)2 = <SYMB <MUL (<NUMB v1>)<NUMB v2>>>
+      '-'v(D)1'*'v(D)2 = <SYMB <MUL (<NUMB '-'v1>)<NUMB v2>>>
+      v(D)1'*-'v(D)2 = <SYMB <MUL (<NUMB v1>)<NUMB '-'v2>>>
+      '+'v(D)1'*'v(D)2 = <SYMB <MUL (<NUMB v1>)<NUMB v2>>>
+      '+'v(D)1'*-'v(D)2 = <SYMB <MUL (<NUMB v1>)<NUMB '-'v2>>>
+      '-'v(D)1'*-'v(D)2 = <SYMB <MUL (<NUMB '-'v1>)<NUMB '-'v2>>>
+      '-'v(D)1'/-'v(D)2 = <vich v1'/'v2>
+      e1'/1' = <vich e1>
+      v(D)1'/'v(D)2 =  <del <NUMB v2>'.'<DR (<NUMB v1>)<NUMB v2>>>
+      '+'v(D)1'/'v(D)2 =  <del <NUMB v2>'.'<DR (<NUMB v1>)<NUMB v2>>>
+      v(D)1'/+'v(D)2 =  <del <NUMB v2>'.'<DR (<NUMB v1>)<NUMB v2>>>
+      '+'v(D)1'/+'v(D)2 =  <del <NUMB v2>'.'<DR (<NUMB v1>)<NUMB v2>>>
+      '-'v(D)1'/'v(D)2 =  <del <NUMB v2>'.'<DR (<NUMB '-'v1>)<NUMB v2>>>
+      v(D)1'/-'v(D)2 =  <del <NUMB '-'v2>'.'<DR (<NUMB v1>)<NUMB '-'v2>>>
+      '-'v(D)1'/-'v(D)2 =  <del <NUMB '-'v2>'.'<DR (<NUMB '-'v1>)<NUMB '-'v2>>>
+      e1'*1's((D))3e2 = <vich e1s3e2>
+      e1'*+'e2 = <vich e1'*'e2>
+      v(d)1'/'v(d)2v('+-')3v(d)4 = <vich2 <vich2 v1v3<vich2 v4'*'v2>>'/'v2>
+      v(d)1'/'v(d)2v('+-')3v(d)4'/'v(d)5 = <vich2 <vich2 <vich2 v1'*'v5>v3<vich2 v4'*'v2>>'/'<vich2 v2'*'v5>>
+      
+       v(D)1'+'v(D)2'/'v(D)3 = <vich <vich v(D)1'*'v(D)3>'+'v(D)2>'/'v(D)3
+      v(D)1'-'v(D)2'/'v(D)3 = <vich <vich v(D)1'*'v(D)3>'-'v(D)2>'/'v(D)3
+      v(D)1'+'v(D)2'/-'v(D)3 = <vich <vich v(D)1'*-'v(D)3>'+'v(D)2>'/-'v(D)3
+      v(D)1'-'v(D)2'/-'v(D)3 = <vich <vich v(D)1'*-'v(D)3>'-'v(D)2>'/-'v(D)3
+      '+'v(D)1'+'v(D)2'/'v(D)3 = <vich <vich v(D)1'*'v(D)3>'+'v(D)2>'/'v(D)3
+      '+'v(D)1'-'v(D)2'/'v(D)3 = <vich <vich v(D)1'*'v(D)3>'-'v(D)2>'/'v(D)3
+      '+'v(D)1'+'v(D)2'/-'v(D)3 = <vich <vich v(D)1'*-'v(D)3>'+'v(D)2>'/-'v(D)3
+      '+'v(D)1'-'v(D)2'/-'v(D)3 = <vich <vich v(D)1'*-'v(D)3>'-'v(D)2>'/-'v(D)3
+      
+      v(D)1'/'v(D)2 = <SYMB <DIV (<NUMB v1>)<NUMB v2>>>
+      '-'v(D)1'/'v(D)2 = <SYMB <DIV (<NUMB '-'v1>)<NUMB v2>>>
+      '-'v(D)1'/-'v(D)2 = <SYMB <DIV (<NUMB '-'v1>)<NUMB '-'v2>>>
+      '+'v(D)1'/'v(D)2 = <SYMB <DIV (<NUMB v1>)<NUMB v2>>>
+      '+'v(D)1'/-'v(D)2 = <SYMB <DIV (<NUMB v1>)<NUMB '-'v2>>>
+      v(D)1'/-'v(D)2 = <SYMB <DIV (<NUMB v1>)<NUMB '-'v2>>>
+      v(d)1'/'v(d)2'/'v(d)3'/'v(d)4 = <vich2 <vich2 v1'/'v3>'/'<vich2 v4'/'v2>>
+      e(D)1'*-'v(D)2s((D))3e4 = <vich2 <SYMB <MUL (<NUMB e1>)<NUMB '-'v2>>>s3e4>
+      e(D)1'*'v(D)2s((D))3e4 = <vich2 <SYMB <MUL (<NUMB e1>)<NUMB v2>>>s3e4>
+      '+'e(D)1'*-'v(D)2s((D))3e4 = <vich2 <SYMB <MUL (<NUMB e1>)<NUMB '-'v2>>>s3e4>
+      '+'e(D)1'*'v(D)2s((D))3e4 = <vich2 <SYMB <MUL (<NUMB e1>)<NUMB v2>>>s3e4>
+      '-'e(D)1'/'v(D)2s((D))3e4 = <vich2 <SYMB <DIV (<NUMB '-'e1>)<NUMB v2>>>s3e4>
+      e(D)1'/'v(D)2s((D))3e4 = <vich2 <SYMB <DIV (<NUMB e1>)<NUMB v2>>>s3e4>
+      
+      
+      
+       
+      e1 = e1
+
+del v2'.'v1(/0/) = <SYMB v1>
+    v2'.'v1('-'/0/) = <SYMB v1>
+    v2'.'v1(v3) = <SYMB <ADD (<MUL (v2)v1>)v3>>'/'<SYMB v2>
+    v2'.'e1 = e1
+    e1 = e1
+
+
+dvoinz 
+       e1'++'e2 = <dvoinz e1'+'e2>
+       e1'+-'e2 = <dvoinz e1'-'e2>
+       e1'-+'e2 = <dvoinz e1'-'e2>
+       e1'--'e2 = <dvoinz e1'+'e2>
+       e1'+='e2 = <dvoinz e1'='e2>
+       e1'-='e2 = <dvoinz e1'='e2>
+       
+       e1 = e1
+
+podobn ((e1)e2)((e3)e2)e4 = <podobn (( <vich <dvoinz e1'+'e3>>)e2)e4>
+       ((e1)e2)e4((e3)e2)e5 = <podobn ((<vich <dvoinz e1'+'e3>>)e2)e4e5>
+       e6((e1)e2)((e3)e2)e4 = <podobn e6((<vich <dvoinz e1'+'e3>>)e2)e4>
+       e6((e1)e2)e4((e3)e2)e5 = <podobn e6((<vich <dvoinz e1'+'e3>>)e2)e4e5>
+       e1 = e1
+
+viraz ((e(('0'))1)e(L)2)e3'=0' =  (('1')e2)'='<viraz2 (('1')e2)'='<viraz1 (('1')e2)'=-'e3'/'e1>>
+      e1 = 
+
+viraz1 e1'=-'((e2)e3)e4 = ((<dvoinz '-'e2>)e3)<viraz1 e1'=-'e4>
+       e1'=-'e2 = e2
+       e1 = 
+
+viraz2 ((e1)e2)'='((e3)e4)e5'/'e6 =  ((<vich (e3)'/'e6>)e4)<viraz2 ((e1)e2)'='e5'/'e6>
+       ((e1)e2)'='e3'/'e4 = 
+       e1 = 
+
+podst (('1')e1)'='e2', 'e3((e4)e1)e5 = e3<domn e4'*'e2><podst (('1')e1)'='e2', 'e5>
+      (('1')e1)'='e2', 'e3 = e3
+      e1 = e1
+
+domn e1'*'((e2)e3)e4 = ((<vich e1'*'e2>)e3)<domn e1'*'e4>
+     e1'*'=
+     e1 = e1
+     
+raskr ((e1)e(('@'))2)e3 = e1'*'e2'+'<raskr e3>
+      ((e1)e2)v3 = e1'+'<raskr v3>
+      ((e1)e2) = e1
+      e1 = e1
+
+
+check (('1')s(L)1)'='e2 = <PRINT s1'='<dvoinz <raskr e2>> >
+      (('0')s(L)1)(('0')'@')'=0'= <PRINT' Beskonechnoe kolichestvo resheniy'>
+      (('0')s(L)1)((e2)'@')'=0' = <PRINT 'NET RESHENIY'>
+      e1(('0')s(L)2)e3 = <check e1e3>
+     
+      ((e1)'@')((e2)e3)'=0' = <PRINT e3'='<vich (<dvoinz '-'e1>)'/'e2>>
+      ((e2)e3)((e1)'@')'=0' = <PRINT e3'='<vich (<dvoinz '-'e1>)'/'e2>>
+      ((e2)e3)'='((e1)'@') =  <PRINT e3'='<vich (<dvoinz e1>)'/'e2>>
+      = <PRINT ' Beskonechnoe kolichestvo resheniy'>
+      e1 = <rzl e1>
+      
+check1 e((L))1s(L)2e((L))3s2e4 = <check1 s2e4>
+       s2e((L))1 = 'true'
+       s2s2e((L))1 = 'true'
+       e1 = 'false'
+       
+check2 e1', 'e2 = <rzl e1>'.'<check2  e2>
+       e1 = <rzl e1>
+       
+check3 e1'.'e1'.'e2 = <check3 e1'.'e2>
+       e1'.'e1 = e1
+       e1'.'e(('.'))2v('.')3e4 = <check4 e1'.'e2><check3 e2v3e4>
+       e1'.'v(('.'))2 = <check4  e1'.'v2>
+       
+       e1 = <PRINT 'raznie otveti => net resheniy'>
+       
+check4 s(L)5'='e1'/'e2'.'s(L)5'='e3'/'e4 = <check5 <vich e1'*'e4>'.'<vich e2'*'e3>>
+       e1 = <PRINT 'raznie otveti => net resheniy'>
+
+check5 e1'.'e1 = 
+       e1 = <PRINT 'raznie otveti => net resheniy'>
+
+check6 ' Beskonechnoe kolichestvo resheniy, 'e1 = e1
+       e1 = e1
+
+podst2 s(L)1'='e2', 'e3((e5)s1)e4 =  <podobn <podst2 s(L)1'='e2', 'e3((<vich e5'*'e2>)'@')e4>>
+       s(L)1'='e2', 'e3 = e3
+       e1 = e1
+
+podst3 'NET RESHENIY, 'e1 = 
+       
+       s(L)1'='e2', 'e3s1e4 = <podst3 s(L)1'='e2', 'e3e2e4>
+       s(L)1'='e2', 'e3 = e3
+       e1 = e1
+
+perv R e1', 'e2 =  e1
+     e1 = e1
+
+begin e1 = <begin1 <check1 e1>e1>
+
+begin1 'false'e1 = <start0 e1>
+       'true'e1 = <check3 <check2 e1>>
+
+start0 
+       e((','))1 = <rzl e1>
+       e1 = <start1 e1><RP 'a=' e1>
+
+start1 e1 = <start0 <perv <podst3  <check6 <rzl e1>', 'e1>>>>
+       
+       e1 = e1
+       
+ 
+go = <begin 'x+y=2, 2*x+2*y=4'>
+     
+ end
